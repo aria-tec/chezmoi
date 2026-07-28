@@ -1,3 +1,7 @@
 brew install --cask nikitabobko/tap/aerospace
 brew tap FelixKratz/formulae
 brew install borders
+brew install --cask raycast
+# install aerospace exstension on raycast
+brew tap FelixKratz/formulae
+brew install sketchybar
