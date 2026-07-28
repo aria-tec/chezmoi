@@ -5,3 +5,6 @@ brew install --cask raycast
 # install aerospace exstension on raycast
 brew tap FelixKratz/formulae
 brew install sketchybar
+brew install starship
+# install alacritty
+brew install --cask font-jetbrains-mono-nerd-font
