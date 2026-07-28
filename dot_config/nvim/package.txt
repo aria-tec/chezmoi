@@ -1,0 +1,4 @@
+npm install -g fd-find
+npm i @ast-grep/cli -g
+wget
+
