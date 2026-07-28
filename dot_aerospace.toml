@@ -2,9 +2,9 @@
 
 config-version = 2
 
-# Run JankyBorders on startup to draw active/inactive window borders (Gruvbox Material Theme)
+# Run JankyBorders on startup to draw active/inactive window borders (Gruvbox Material Blue Theme)
 after-startup-command = [
-  'exec-and-forget borders active_color=0xffe78a4e inactive_color=0xff504945 width=5.0'
+  'exec-and-forget borders active_color=0xff7daea3 inactive_color=0xff504945 width=5.0'
 ]
 
 # In i3, all workspaces are phantom
