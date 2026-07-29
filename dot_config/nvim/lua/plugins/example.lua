@@ -9,31 +9,33 @@
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
-  -- add gruvbox-material
+  -- add xcodedark
   {
-    "sainnhe/gruvbox-material",
-    init = function()
-      vim.g.gruvbox_material_background = "soft"
-      vim.g.gruvbox_material_transparent_background = 1
-    end,
-  },
-
-  -- Configure LazyVim to load gruvbox-material
-  {
-    "LazyVim/LazyVim",
+    "fraeso/xcodedark.nvim",
     opts = {
-      colorscheme = "gruvbox-material",
+      transparent = true,
+      integrations = {
+        telescope = true,
+        nvim_tree = true,
+        gitsigns = true,
+        bufferline = true,
+        incline = true,
+        lazygit = true,
+        which_key = true,
+        notify = true,
+        snacks = true,
+        blink = true,
+      },
+      terminal_colors = true,
     },
   },
 
-  -- Configure lualine theme
+  -- Configure LazyVim to load xcodedark
   {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    opts = function(_, opts)
-      opts.options = opts.options or {}
-      opts.options.theme = "gruvbox-material"
-    end,
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "xcodedark",
+    },
   },
 
 
