@@ -31,7 +31,9 @@
           prettier
 
           # rust
-          # install rustup component add rust-src
+          cargo
+          rust-analyzer
+          clippy
 
           
           yaml-language-server
@@ -48,6 +50,12 @@
           dart   
           bash-language-server
           astro-language-server
+
+	        helix
+	        zellij
+	        starship
+	        gcc
+	  
       ];
     };
   };

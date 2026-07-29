@@ -1,5 +1,16 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+add_newline = false
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+
+[cmd_duration]
+min_time = 2000
+format = "[◄ $duration ](italic yellow)"
+
 [aws]
 symbol = " "
 
@@ -84,6 +95,20 @@ symbol = " "
 
 [git_branch]
 symbol = " "
+
+[git_status]
+style = "bold red"
+format = "([$all_status$ahead_behind]($style) )"
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
 
 [git_commit]
 tag_symbol = '  '
@@ -281,10 +306,15 @@ symbol = " "
 symbol = " "
 
 [status]
-symbol = " "
+symbol = "✘ "
+format = "[$symbol$status]($style) "
+style = "bold red"
+disabled = false
 
 [sudo]
-symbol = " "
+symbol = "⚡ "
+style = "bold italic bright-purple"
+disabled = false
 
 [swift]
 symbol = " "
