@@ -1,0 +1,192 @@
+# ==============================================================================
+# 1. REACT & NEXT.JS - TYPESCRIPT (.ts)
+# ==============================================================================
+[[language]]
+name = "typescript"
+scope = "source.ts"
+file-types = ["ts"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "%{buffer_name}"] }
+language-servers = ["vtsls", "typescript-language-server", "eslint"]
+
+[language-server.vtsls]
+command = "vtsls"
+args = ["--stdio"]
+
+[language-server.vtsls.config.typescript.inlayHints]
+parameterNames = { enabled = "all", suppressWhenArgumentMatchesName = true }
+parameterTypes = { enabled = true }
+variableTypes = { enabled = true, suppressWhenTypeMatchesName = true }
+propertyDeclarationTypes = { enabled = true }
+functionLikeReturnTypes = { enabled = true }
+enumMemberValues = { enabled = true }
+
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language-server.typescript-language-server.config.typescript.inlayHints]
+includeInlayParameterNameHints = "all"
+includeInlayParameterNameHintsWhenArgumentMatchesName = false
+includeInlayFunctionParameterTypeHints = true
+includeInlayVariableTypeHints = true
+includeInlayVariableTypeHintsWhenTypeMatchesName = false
+includeInlayPropertyDeclarationTypeHints = true
+includeInlayFunctionLikeReturnTypeHints = true
+includeInlayEnumMemberValueHints = true
+
+
+# ==============================================================================
+# 2. REACT & NEXT.JS - TSX (.tsx)
+# ==============================================================================
+[[language]]
+name = "tsx"
+scope = "source.tsx"
+file-types = ["tsx"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "%{buffer_name}"] }
+language-servers = ["vtsls", "typescript-language-server", "eslint", "tailwindcss-ls"]
+
+
+# ==============================================================================
+# 3. REACT & NEXT.JS - JAVASCRIPT (.js, .mjs, .cjs)
+# ==============================================================================
+[[language]]
+name = "javascript"
+scope = "source.js"
+file-types = ["js", "mjs", "cjs"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "%{buffer_name}"] }
+language-servers = ["vtsls", "typescript-language-server", "eslint"]
+
+[language-server.vtsls.config.javascript.inlayHints]
+parameterNames = { enabled = "all", suppressWhenArgumentMatchesName = true }
+parameterTypes = { enabled = true }
+variableTypes = { enabled = true, suppressWhenTypeMatchesName = true }
+propertyDeclarationTypes = { enabled = true }
+functionLikeReturnTypes = { enabled = true }
+enumMemberValues = { enabled = true }
+
+[language-server.typescript-language-server.config.javascript.inlayHints]
+includeInlayParameterNameHints = "all"
+includeInlayParameterNameHintsWhenArgumentMatchesName = false
+includeInlayFunctionParameterTypeHints = true
+includeInlayVariableTypeHints = true
+includeInlayVariableTypeHintsWhenTypeMatchesName = false
+includeInlayPropertyDeclarationTypeHints = true
+includeInlayFunctionLikeReturnTypeHints = true
+includeInlayEnumMemberValueHints = true
+
+
+# ==============================================================================
+# 4. REACT & NEXT.JS - JSX (.jsx)
+# ==============================================================================
+[[language]]
+name = "jsx"
+scope = "source.jsx"
+file-types = ["jsx"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "%{buffer_name}"] }
+language-servers = ["vtsls", "typescript-language-server", "eslint", "tailwindcss-ls"]
+
+
+# ==============================================================================
+# 5. ASTRO FRAMEWORK (.astro)
+# ==============================================================================
+[[language]]
+name = "astro"
+scope = "source.astro"
+file-types = ["astro"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "%{buffer_name}"] }
+language-servers = ["astro-ls", "tailwindcss-ls", "eslint"]
+
+[language-server.astro-ls]
+command = "astro-ls"
+args = ["--stdio"]
+
+[language-server.astro-ls.config.typescript.inlayHints]
+parameterNames = { enabled = "all", suppressWhenArgumentMatchesName = true }
+parameterTypes = { enabled = true }
+variableTypes = { enabled = true, suppressWhenTypeMatchesName = true }
+propertyDeclarationTypes = { enabled = true }
+functionLikeReturnTypes = { enabled = true }
+enumMemberValues = { enabled = true }
+
+
+# ==============================================================================
+# 6. MDX (.mdx)
+# ==============================================================================
+[[language]]
+name = "mdx"
+scope = "source.mdx"
+file-types = ["mdx"]
+auto-format = true
+formatter = { command = "prettier", args = ["--stdin-filepath", "%{buffer_name}"] }
+
+
+# ==============================================================================
+# 7. LARAVEL - PHP (.php) & BLADE (.blade.php)
+# ==============================================================================
+[[language]]
+name = "php"
+scope = "source.php"
+file-types = ["php", "inc", "phtml"]
+auto-format = true
+# Menggunakan Laravel Pint (Formatter standar resmi Laravel)
+formatter = { command = "pint", args = ["%{buffer_name}"] }
+language-servers = ["intelephense"]
+
+[language-server.intelephense]
+command = "intelephense"
+args = ["--stdio"]
+
+[language-server.intelephense.config.intelephense.inlayHints]
+parameterNames = { enable = true }
+typedProperties = { enable = true }
+returnTypes = { enable = true }
+
+# Dukungan Template Laravel Blade (.blade.php)
+[[language]]
+name = "blade"
+scope = "text.html.php.blade"
+file-types = ["blade.php"]
+auto-format = true
+formatter = { command = "blade-formatter", args = ["--stdin"] }
+
+
+# ==============================================================================
+# 8. FLUTTER & DART (.dart)
+# ==============================================================================
+[[language]]
+name = "dart"
+scope = "source.dart"
+file-types = ["dart"]
+auto-format = true
+formatter = { command = "dart", args = ["format"] }
+text-width = 80
+language-servers = ["dart"]
+
+[language-server.dart]
+command = "dart"
+args = ["language-server"]
+
+[language-server.dart.config.dart]
+showTodos = true
+completeFunctionCalls = true
+
+
+# ==============================================================================
+# GLOBAL SHARED LANGUAGE SERVERS (ESLint & Tailwind CSS)
+# ==============================================================================
+[language-server.eslint]
+command = "vscode-eslint-language-server"
+args = ["--stdio"]
+
+[language-server.eslint.config]
+codeActionsOnSave = { mode = "all" }
+format = true
+
+[language-server.tailwindcss-ls]
+command = "tailwindcss-language-server"
+args = ["--stdio"]

@@ -146,8 +146,8 @@ set -g mouse on
 set-option -g status-position top
 set -g @plugin 'tmux-plugins/tmux-sensible' # optional recommended
 # set -g @plugin 'z3z1ma/tmux-gruvbox'
-set -g @plugin 'catppuccin/tmux#v2.3.0'
-set -g @catppuccin_flavor 'frappe' # latte, frappe, macchiato or mocha
+# set -g @plugin 'catppuccin/tmux#v2.3.0'
+# set -g @catppuccin_flavor 'frappe' # latte, frappe, macchiato or mocha
 set -g @plugin 'alexwforsythe/tmux-which-key'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 # set -g @plugin "janoamaral/tokyo-night-tmux"

@@ -1,0 +1,58 @@
+theme = "zenburn"
+
+[editor]
+line-number = "relative"
+mouse = true
+auto-format = true
+bufferline = "multiple"
+color-modes = true
+true-color = true
+gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
+cursorline = true
+cursorcolumn = true
+end-of-line-diagnostics = "hint"
+
+[editor.cursor-shape]
+normal = "block"
+insert = "bar"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.statusline]
+left = ["mode", "spinner", "version-control", "file-name", "file-modification-indicator", "read-only-indicator"]
+center = []
+right = ["diagnostics", "workspace-diagnostics", "selections", "register", "position", "file-encoding", "file-line-ending", "file-indent-style", "file-type"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.auto-save]
+focus-lost = true
+after-delay.enable = true
+after-delay.timeout = 3000
+
+[editor.indent-guides]
+render = true
+character = "│"
+skip-levels = 0
+
+[editor.soft-wrap]
+enable = true
+max-wrap = 25
+max-indent-retain = 0
+wrap-indicator = "↪ "
+
+[editor.inline-diagnostics]
+cursor-line = "hint"
+other-lines = "hint"
+prefix-len = 1
+max-diagnostics = 10
+
+
