@@ -56,6 +56,8 @@
 	        zellij
 	        starship
 	        gcc
+	        lazygit
+	        yazi
 	  
       ];
     };
