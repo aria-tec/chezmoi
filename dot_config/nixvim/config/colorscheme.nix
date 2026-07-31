@@ -360,7 +360,18 @@
   plugins.mini-colors = {
     enable = true;
     luaConfig.post = ''
-      require('mini.colors').get_colorscheme():add_transparency():apply()
+      require('mini.colors')
+        .get_colorscheme()
+        :resolve_links()
+        :add_transparency({
+          general = true,
+          float = false,
+          statuscolumn = false,
+          statusline = true,
+          tabline = false,
+          winbar = false,
+        })
+        :apply()
     '';
   };
 }

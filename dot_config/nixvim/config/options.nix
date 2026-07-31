@@ -1,7 +1,7 @@
 {
   globals = {
     mapleader = " ";
-    clipboard = "osc52";
+    # clipboard = "osc52";
     # loaded_netrw = 1;
     # loaded_netrwPlugin = 1;
   };
@@ -20,7 +20,7 @@
     expandtab = true;
     # number = true;
     relativenumber = true;
-    clipboard = "unnamedplus";
+    # clipboard = "unnamedplus";
     laststatus = 3; # Menggunakan statusline global tunggal
     showmode = false; # Menghapus indikator mode bawaan Neovim
     autoindent = true;

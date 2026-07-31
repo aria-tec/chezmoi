@@ -5,7 +5,7 @@
       ./mini/keymaps.nix
       ./mini/mini-ai.nix
       ./mini/mini-align.nix
-      # ./mini/mini-animate.nix
+      ./mini/mini-animate.nix
       ./mini/mini-basic.nix
       ./mini/mini-bracketed.nix
       ./mini/mini-bufremove.nix

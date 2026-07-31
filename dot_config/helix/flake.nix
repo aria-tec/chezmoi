@@ -58,6 +58,8 @@
 	        gcc
 	        lazygit
 	        yazi
+	        gitui
+	        rainfrog
 	  
       ];
     };

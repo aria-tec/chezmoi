@@ -111,8 +111,39 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+#=========================#
+# CUSTOM BASHRC           #
+#=========================#
+
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
+alias nvim-bench='for i in {1..5}; do nvim --startuptime "/tmp/s_$i.log" -c "qall!" && echo -n "Run $i: " && grep "NVIM STARTED" "/tmp/s_$i.log" | tail -n 1; done'
+
+alias nvim-bench-100='echo "Memulai benchmark 100 kali..."; for i in {1..100}; do nvim --startuptime "/tmp/s_$i.log" -c "qall!" && grep "NVIM STARTED" "/tmp/s_$i.log" | tail -n 1 >> /tmp/benchmark_results.txt; done; echo "Selesai! Statistik akhir:" && awk "{sum+=\$1} END {print \"Rata-rata Startup Time: \" sum/NR \" ms\"}" /tmp/benchmark_results.txt && rm /tmp/s_*.log'
+
+export EDITOR="hx"
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	command rm -f -- "$tmp"
+}
+
+
 eval "$(starship init bash)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# pnpm
+export PNPM_HOME="/home/arias/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
