@@ -60,6 +60,7 @@
 	        yazi
 	        gitui
 	        rainfrog
+	        atac
 	  
       ];
     };
