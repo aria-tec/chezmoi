@@ -124,7 +124,8 @@ alias nvim-bench='for i in {1..5}; do nvim --startuptime "/tmp/s_$i.log" -c "qal
 
 alias nvim-bench-100='echo "Memulai benchmark 100 kali..."; for i in {1..100}; do nvim --startuptime "/tmp/s_$i.log" -c "qall!" && grep "NVIM STARTED" "/tmp/s_$i.log" | tail -n 1 >> /tmp/benchmark_results.txt; done; echo "Selesai! Statistik akhir:" && awk "{sum+=\$1} END {print \"Rata-rata Startup Time: \" sum/NR \" ms\"}" /tmp/benchmark_results.txt && rm /tmp/s_*.log'
 
-export EDITOR="hx"
+export EDITOR="nvim"
+
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	command yazi "$@" --cwd-file="$tmp"

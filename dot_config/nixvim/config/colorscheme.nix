@@ -1,30 +1,30 @@
 {
-  colorschemes.mini-base16 = {
-    enable = true;
-    settings = {
-      use_cterm = true;
-      plugins = {
-        default = true;
-      };
-      palette = {
-        base00 = "#292a31"; # bg
-        base01 = "#2D2D30"; # bg_alt
-        base02 = "#636f83"; # visual
-        base03 = "#6C7986"; # comment
-        base04 = "#9D9D9D"; # fg_dark
-        base05 = "#FFFFFF"; # fg
-        base06 = "#D4D4D4"; # fg_alt
-        base07 = "#FFFFFF"; # fg
-        base08 = "#67B7A4"; # variable
-        base09 = "#4EB0CC"; # constant
-        base0A = "#6BDFFF"; # type
-        base0B = "#FF8170"; # string
-        base0C = "#FD8F3F"; # attribute
-        base0D = "#67B7A4"; # function_name
-        base0E = "#FF7AB2"; # keyword
-        base0F = "#D2A8FF"; # purple
-      };
-    };
+  # colorschemes.mini-base16 = {
+  #   enable = true;
+  #   settings = {
+  #     use_cterm = true;
+  #     plugins = {
+  #       default = true;
+  #     };
+  #     palette = {
+  #       base00 = "#292a31"; # bg
+  #       base01 = "#2D2D30"; # bg_alt
+  #       base02 = "#636f83"; # visual
+  #       base03 = "#6C7986"; # comment
+  #       base04 = "#9D9D9D"; # fg_dark
+  #       base05 = "#FFFFFF"; # fg
+  #       base06 = "#D4D4D4"; # fg_alt
+  #       base07 = "#FFFFFF"; # fg
+  #       base08 = "#67B7A4"; # variable
+  #       base09 = "#4EB0CC"; # constant
+  #       base0A = "#6BDFFF"; # type
+  #       base0B = "#FF8170"; # string
+  #       base0C = "#FD8F3F"; # attribute
+  #       base0D = "#67B7A4"; # function_name
+  #       base0E = "#FF7AB2"; # keyword
+  #       base0F = "#D2A8FF"; # purple
+  #     };
+  #   };
     # luaConfig.post = ''
     #   local colors = {
     #     bg = "#292a31",
@@ -355,7 +355,7 @@
     #     vim.api.nvim_set_hl(0, group, opts)
     #   end
     # '';
-  };
+  # };
 
   plugins.mini-colors = {
     enable = true;

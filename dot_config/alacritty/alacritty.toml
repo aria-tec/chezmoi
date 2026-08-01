@@ -1,5 +1,5 @@
 [general]
-import = [ "~/.config/alacritty/themes/themes/xcode_dark.toml" ]
+import = [ "~/.config/alacritty/themes/themes/one_dark.toml" ]
 
 [window]
 opacity = 0.85

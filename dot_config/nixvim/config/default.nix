@@ -9,7 +9,7 @@
       ./mini/mini-basic.nix
       ./mini/mini-bracketed.nix
       ./mini/mini-bufremove.nix
-      # ./mini/mini-clue.nix
+      # # ./mini/mini-clue.nix
       ./mini/mini-cmdline.nix
       ./mini/mini-comment.nix
       ./mini/mini-completion.nix
@@ -31,13 +31,12 @@
       ./mini/mini-statusline.nix
       ./mini/miniex.nix
       # ./blink-tree.nix
-      # ./colorscheme.nix
+      # ./blink-cmp.nix
+      ./colorscheme.nix
       ./friendly-snippets.nix
       ./lsp.nix
-      # ./nvim-tree.nix
       ./options.nix
       ./performance.nix
-      ./colorscheme.nix
       ./treesitter.nix
       ./which-key.nix
     ];
