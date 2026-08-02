@@ -3,3 +3,4 @@ if [ -f "$HOME/.bashrc" ]; then
 fi
 
 eval "$(starship init bash)"
+. "$HOME/.cargo/env"

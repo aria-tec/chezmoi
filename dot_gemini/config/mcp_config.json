@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "google-trends": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "google-trends-mcp"
+      ]
+    },
+    "smithery": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "mcp"
+      ]
+    }
+  }
+}

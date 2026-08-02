@@ -55,6 +55,7 @@ now_if_args(function()
     'lua',
     'vimdoc',
     'markdown',
+    'rust',
     -- Add here more languages with which you want to use tree-sitter
     -- To see available languages:
     -- - Execute `:=require('nvim-treesitter').get_available()`
@@ -105,6 +106,7 @@ now_if_args(function()
   -- Uncomment and tweak the following `vim.lsp.enable()` call to enable servers.
   vim.lsp.enable({
     'lua_ls',
+    'rust_analyzer'
   })
 end)
 
@@ -130,7 +132,10 @@ later(function()
     },
     -- Map of filetype to formatters
     -- Make sure that necessary CLI tool is available
-    formatters_by_ft = { lua = { 'stylua' } },
+    formatters_by_ft = {
+      lua = { 'stylua' },
+      rust = { 'rustfmt' },
+    },
   })
 end)
 

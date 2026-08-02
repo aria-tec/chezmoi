@@ -31,10 +31,10 @@
           prettier
 
           # rust
-          cargo
-          rust-analyzer
-          clippy
-          rustfmt
+          # cargo
+          # rust-analyzer
+          # clippy
+          # rustfmt
 
           
           yaml-language-server
