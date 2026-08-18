@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Council Report: Plugin Strategy (Install, Ganti, Hapus)</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-green: #4ade80;
+      --accent-red: #f87171;
+      --accent-amber: #fbbf24;
+      --accent-purple: #c084fc;
+      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-stack);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      margin-bottom: 0.75rem;
+    }
+    .badge-council { background: rgba(56, 189, 248, 0.15); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
+    .badge-install { background: rgba(74, 222, 128, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
+    .badge-ganti { background: rgba(251, 191, 36, 0.15); color: var(--accent-amber); border: 1px solid var(--accent-amber); }
+    .badge-hapus { background: rgba(248, 113, 113, 0.15); color: var(--accent-red); border: 1px solid var(--accent-red); }
+    
+    h1 { font-size: 1.85rem; font-weight: 800; margin-bottom: 0.5rem; color: #ffffff; }
+    h2 { font-size: 1.35rem; font-weight: 700; margin: 1.5rem 0 1rem; color: var(--accent-blue); }
+    h3 { font-size: 1.1rem; font-weight: 600; margin: 1rem 0 0.5rem; color: #e2e8f0; }
+    p { color: var(--text-muted); margin-bottom: 1rem; }
+    
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
+    }
+    .verdict-hero {
+      border-left: 4px solid var(--accent-green);
+      background: linear-gradient(180deg, rgba(30, 41, 59, 1) 0%, rgba(15, 23, 42, 0.8) 100%);
+    }
+    
+    /* Visual Matrix Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+    th, td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+    th {
+      background: rgba(15, 23, 42, 0.6);
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+    tr:hover { background: rgba(255, 255, 255, 0.02); }
+    
+    /* Alignment Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .advisor-pill {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 0.75rem;
+      text-align: center;
+    }
+    .advisor-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; color: #fff; }
+    .advisor-stance { font-size: 0.8rem; font-weight: 500; }
+    
+    /* Collapsible Details */
+    details {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+    summary {
+      padding: 0.85rem 1.15rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #e2e8f0;
+    }
+    summary:hover { background: rgba(255, 255, 255, 0.03); }
+    .details-content {
+      padding: 1rem 1.15rem;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.92rem;
+      color: #cbd5e1;
+    }
+    
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.85rem;
+    }
+    code {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      color: var(--accent-blue);
+    }
+    pre {
+      background: #090d16;
+      border: 1px solid #1e293b;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+      color: #e2e8f0;
+    }
+    
+    .action-box {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge badge-council">5-Advisor Council Verdict</span>
+      <h1>Keputusan Plugin & Skill: Install, Ganti, Hapus</h1>
+      <p>Evaluasi menyeluruh terhadap katalog <a href="https://github.com/aria-tec/awesome-claude-plugins" target="_blank" style="color: var(--accent-blue);">awesome-claude-plugins</a> untuk setup agent Antigravity/Gemini yang dikelola via Chezmoi dotfiles.</p>
+    </header>
+
+    <!-- Visual Advisor Stance Matrix -->
+    <div class="card">
+      <h3>Sikap Dewan Penasihat (Council Alignment)</h3>
+      <div class="grid">
+        <div class="advisor-pill">
+          <div class="advisor-name">The Contrarian</div>
+          <div class="advisor-stance" style="color: var(--accent-red);">Purge 80% Bloat</div>
+        </div>
+        <div class="advisor-pill">
+          <div class="advisor-name">First Principles</div>
+          <div class="advisor-stance" style="color: var(--accent-blue);">Hanya AST & Git</div>
+        </div>
+        <div class="advisor-pill">
+          <div class="advisor-name">The Expansionist</div>
+          <div class="advisor-stance" style="color: var(--accent-green);">Memory & Graph</div>
+        </div>
+        <div class="advisor-pill">
+          <div class="advisor-name">The Outsider ⭐</div>
+          <div class="advisor-stance" style="color: var(--accent-amber);">Chezmoi Portability</div>
+        </div>
+        <div class="advisor-pill">
+          <div class="advisor-name">The Executor</div>
+          <div class="advisor-stance" style="color: var(--accent-purple);">Prune & GitNexus</div>
+        </div>
+      </div>
+      <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #94a3b8;">
+        ⭐ <em>The Outsider</em> dinilai paling solid oleh seluruh penasihat dalam babak peer-review karena konsisten mempertahankan idempotensi dan portabilitas dotfiles Chezmoi.
+      </p>
+    </div>
+
+    <!-- Chairman Verdict Card -->
+    <div class="card verdict-hero">
+      <h2>Ringkasan Putusan Ketua Dewan (Chairman Verdict)</h2>
+      <p><strong>Diagnosis Utama:</strong> Setup Anda mengalami <em>Context & Prompt Duplication</em> pada skill arsitektur dan dokumentasi. Selain itu, sebagian besar plugin populer di katalog Claude adalah *vibe prompt wrappers* atau *stateful memory daemons* yang akan merusak portabilitas dotfiles chezmoi.</p>
+
+      <div style="margin: 1.5rem 0;">
+        <h3 style="color: var(--accent-green);">1. Dimana Dewan Sepakat (High Confidence)</h3>
+        <ul style="padding-left: 1.25rem; color: #cbd5e1; font-size: 0.95rem;">
+          <li><strong>Pangkas 4 dari 6 Skill Arsitektur:</strong> Memasang 6 skill arsitektur terpisah adalah over-engineering. Model modern sudah menguasai Clean/Hexagonal tanpa 5 prompt berulang.</li>
+          <li><strong>Hapus Skill <code>find-docs</code>:</strong> 100% redundan karena Context7 CLI sudah terpasang aktif di <code>GEMINI.md</code>.</li>
+          <li><strong>Blacklist Meta-Bundles & Gimmick:</strong> Tolak <code>ECC</code>, <code>agentic-awesome-skills</code>, <code>caveman</code>, <code>ponytail</code> karena memicu prompt collision dengan <code>superpowers</code>.</li>
+        </ul>
+      </div>
+
+      <div style="margin: 1.5rem 0;">
+        <h3 style="color: var(--accent-amber);">2. Perdebatan & Resolusi (Trade-off Resolution)</h3>
+        <ul style="padding-left: 1.25rem; color: #cbd5e1; font-size: 0.95rem;">
+          <li><strong>Memory Tools (<code>claude-mem</code> / <code>mem0</code>):</strong> DITOLAK dari dotfiles. Database/daemon lokal merusak sinkronisasi antar-mesin dan memicu halusinasi state usang. Ganti dengan <code>MEMORY.md</code> lokal per-proyek.</li>
+          <li><strong>Code Intelligence (<code>GitNexus</code>):</strong> DISETUJUI. AST graph RAG memberikan pemahaman dependensi deterministik pada codebase monorepo/skala besar.</li>
+          <li><strong>Design Token (<code>ui-ux-pro-max-skill</code>):</strong> OPSIONAL. Hanya dipasang jika Anda aktif membuat desain CSS frontend baru dari nol.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Master Action Matrix -->
+    <div class="card">
+      <h2>Matriks Rekomendasi Tindakan (Action Plan)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Plugin / Skill</th>
+            <th>Tindakan di Chezmoi</th>
+            <th>Alasan Teknis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge badge-hapus">HAPUS</span></td>
+            <td><code>documentation-and-adrs</code></td>
+            <td>Hapus dari dotfiles</td>
+            <td>100% duplikat dengan <code>architecture-decision-records</code></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-hapus">HAPUS</span></td>
+            <td><code>architecture-blueprint-generator</code><br><code>architecture-patterns</code><br><code>improve-codebase-architecture</code></td>
+            <td>Hapus dari dotfiles</td>
+            <td>Redundansi prompt; cukup pertahankan <code>architecture-designer</code> & <code>hexagonal-architecture</code></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-hapus">HAPUS</span></td>
+            <td><code>find-docs</code></td>
+            <td>Hapus dari dotfiles</td>
+            <td>Duplikat dengan rule global Context7 (<code>npx ctx7@latest</code>) di <code>GEMINI.md</code></td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-ganti">GANTI</span></td>
+            <td>6 Skill Arsitektur</td>
+            <td>Konsolidasi ke 2 skill</td>
+            <td>Mencegah <em>tool hallucination</em> dan menghemat context registration tokens</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-ganti">GANTI</span></td>
+            <td>Memory Daemons (<code>mem0</code>, <code>claude-mem</code>)</td>
+            <td>Gunakan Markdown Docs</td>
+            <td>Gunakan <code>MEMORY.md</code> atau Git log per-repo; zero external dependencies</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-install">INSTALL</span></td>
+            <td><strong><code>GitNexus</code></strong></td>
+            <td>Install sebagai Tool/Skill</td>
+            <td>Analisis AST graph & blast radius dependensi untuk refactoring kode</td>
+          </tr>
+          <tr>
+            <td><span class="badge badge-install" style="opacity: 0.8;">OPSIONAL</span></td>
+            <td><strong><code>ui-ux-pro-max-skill</code></strong></td>
+            <td>Install jika Frontend-heavy</td>
+            <td>Desain sistem & token UI pelengkap <code>modern-web-guidance-plugin</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- The One Thing to Do First -->
+    <div class="action-box">
+      <h3 style="color: var(--accent-blue); margin-bottom: 0.5rem;">⚡ Langkah Pertama yang Harus Dilakukan (Do This First)</h3>
+      <p style="margin-bottom: 0.75rem;">Jalankan perintah ini di terminal untuk membersihkan tumpukan skill yang redundan di chezmoi:</p>
+      <pre><code>cd /Users/arias/.local/share/chezmoi
+git rm -r dot_gemini/config/skills/documentation-and-adrs
+git rm -r dot_gemini/config/skills/architecture-blueprint-generator
+git rm -r dot_gemini/config/skills/architecture-patterns
+git rm -r dot_gemini/config/skills/improve-codebase-architecture
+git rm -r dot_gemini/config/skills/find-docs
+git commit -m "refactor(gemini): prune redundant architecture and docs skills"
+chezmoi apply</code></pre>
+    </div>
+
+    <!-- Collapsible Full Transcripts -->
+    <h2 style="margin-top: 2.5rem;">Detail Argumen & Peer Review</h2>
+    
+    <details>
+      <summary><span>The Contrarian (Skeptisisme & Anti-Bloat)</span> <span style="font-size: 0.8rem; color: var(--accent-red);">Purge</span></summary>
+      <div class="details-content">
+        <p>Setup Anda sudah mengalami context obesity parah. Sebagian besar daftar kandidat hanyalah token-drain hypeware dan placebo prompt wrappers.</p>
+        <p><strong>1. Pangkas & Hapus:</strong> Hapus 5 dari 6 skill arsitektur. Hapus find-docs karena Context7 sudah aktif di level prompt global.</p>
+        <p><strong>2. Tolak Keras:</strong> Memory traps (claude-mem, mem0, mempalace, ruflo) karena rentan state drift, halusinasi konteks usang, dan menambah latensi. Vibe wrappers (taste-skill, caveman, ponytail) menyedot context budget.</p>
+        <p><strong>3. Putusan:</strong> Purge, don't hoard. Satu-satunya pengecualian adalah GitNexus jika butuh AST graph untuk repo raksasa.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span>The First Principles Thinker (Fundamental Architecture)</span> <span style="font-size: 0.8rem; color: var(--accent-blue);">Prinsip Dasar</span></summary>
+      <div class="details-content">
+        <p>AI coding agent hanya butuh 3 hal: <strong>Context Akurat</strong>, <strong>Eksekusi Deterministik</strong>, dan <strong>Knowledge Terkini</strong>.</p>
+        <p><strong>Tolak Memory Tools:</strong> Single source of truth adalah Git dan codebase, bukan database chat eksternal.</p>
+        <p><strong>Konsolidasi:</strong> Pangkas 6 skill arsitektur menjadi 1-2 skill ringkas.</p>
+        <p><strong>Install:</strong> GitNexus (Context AST deterministik) dan ui-ux-pro-max-skill bersyarat.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span>The Expansionist (Capability Upside)</span> <span style="font-size: 0.8rem; color: var(--accent-green);">Upside</span></summary>
+      <div class="details-content">
+        <p>Melihat potensi lompatan kapabilitas pada 3 frontier superpowers: Persistent Cross-Session Memory (claude-mem/mem0), Graph RAG (GitNexus), dan Design Intelligence (ui-ux-pro-max-skill).</p>
+        <p>Namun tetap menyarankan konsolidasi 6 skill arsitektur untuk membebaskan ruang context.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span>The Outsider (Chezmoi Ergonomics & Portability)</span> <span style="font-size: 0.8rem; color: var(--accent-amber);">Konsistensi Dotfiles</span></summary>
+      <div class="details-content">
+        <p>Menyoroti bahwa setup saat ini adalah <em>prompt hoarding</em>. Chezmoi dibangun untuk portabilitas dan determinisme antar-mesin.</p>
+        <p>Menyimpan memory daemons atau background state merusak sinkronisasi dotfiles. Hapus skill duplikat dan hindari menambah dependensi eksternal tanpa ROI jelas.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span>The Executor (Action Plan & Steps)</span> <span style="font-size: 0.8rem; color: var(--accent-purple);">Eksekusi</span></summary>
+      <div class="details-content">
+        <p>Memberikan langkah penghapusan langsung untuk 4 skill arsitektur dan dokumentasi via <code>chezmoi rm</code>, serta rekomendasi instalasi terfokus pada GitNexus dan UI/UX.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><span>Catatan Kritis Peer Review (Cross-Runtime Compatibility)</span> <span style="font-size: 0.8rem; color: var(--accent-blue);">Wawasan Kritis</span></summary>
+      <div class="details-content">
+        <p>Semua reviewer sepakat pada temuan penting: Repositori dalam katalog Claude Code tidak selalu memiliki schema <code>SKILL.md</code> yang identik dengan Antigravity/Gemini. Jangan clone mentah ke dotfiles tanpa menyesuaikan YAML frontmatter dan struktur MCP.</p>
+      </div>
+    </details>
+
+    <footer>
+      <p>LLM Council Session &bull; 18 Agustus 2026 &bull; Dihasilkan untuk setup Chezmoi / Antigravity / Gemini</p>
+    </footer>
+  </div>
+</body>
+</html>
