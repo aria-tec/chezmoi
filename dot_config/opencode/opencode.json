@@ -1,0 +1,16 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "lsp": true,
+  "plugin": [
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ],
+  "mcp": {
+    "gitnexus": {
+      "type": "local",
+      "command": [
+        "/Users/arias/.nvm/versions/node/v24.19.0/bin/gitnexus",
+        "mcp"
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "repoPath": "/Users/arias/.local/share/chezmoi/dot_gemini",
+  "lastCommit": "",
+  "indexedAt": "2026-08-18T09:14:58.093Z",
+  "stats": {
+    "files": 97,
+    "nodes": 1159,
+    "edges": 1171,
+    "communities": 1,
+    "processes": 0,
+    "embeddings": 0
+  },
+  "capabilities": {
+    "graph": {
+      "provider": "ladybugdb",
+      "status": "available"
+    },
+    "fts": {
+      "provider": "ladybugdb-fts",
+      "status": "unavailable"
+    },
+    "vectorSearch": {
+      "provider": "ladybugdb-vector",
+      "status": "unavailable",
+      "exactScanLimit": 10000
+    }
+  },
+  "cjkSegmentation": "none",
+  "cacheKeys": [
+    "588a4c5c8deecf46168ea0a84ec0fa13d4c318115f7b8b69446be5a12f442f36"
+  ]
+}
